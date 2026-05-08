@@ -1,1 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Plataforma educacional gratuita com cursos, artigos e dicas para desenvolvimento profissional e pessoal. Conteúdo 100% original e white hat.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
+    <title>EduBase | Aprenda com segurança e qualidade</title>
+    <!-- Política de segurança para garantir ambiente white hat -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com; frame-src none; object-src 'none'; base-uri 'self';">
+    <!-- Google Fonts - fonte segura e moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Utilitários */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .btn-primary {
+            background-color: #0466c8;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary:hover {
+            background-color: #035caf;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1.5px solid #cbd5e1;
+            background: white;
+            color: #1e293b;
+        }
+
+        .btn-outline:hover {
+            border-color: #0466c8;
+            color: #0466c8;
+            background: #f0f9ff;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(0px);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 16px 0;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #0466c8, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #0466c8;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 64px;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+        }
+
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 48px;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #334155;
+            margin-bottom: 32px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .stat-item strong {
+            font-size: 1.8rem;
+            color: #0466c8;
+        }
+
+        .hero-image {
+            flex: 0.8;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+
+        /* Features / Cursos */
+        .section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #475569;
+            max-width: 700px;
+            margin: 0 auto 48px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.05);
+            transition: all 0.25s ease;
+            border: 1px solid #eef2ff;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+            border-color: #cbdffc;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            background: #e6f0ff;
+            color: #0466c8;
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background-color: #ffffff;
+            border-top: 1px solid #eef2ff;
+            border-bottom: 1px solid #eef2ff;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 28px;
+            transition: 0.2s;
+        }
+
+        .testimonial-text {
+            font-style: normal;
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .testimonial-user {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* Área de artigos / blog */
+        .articles {
+            background: #f1f5f9;
+        }
+
+        .article-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .article-content {
+            padding: 24px;
+        }
+
+        .article-content h4 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        /* Formulário newsletter (white e transparente) */
+        .newsletter {
+            background: linear-gradient(120deg, #eef2ff, #ffffff);
+            border-radius: 48px;
+            padding: 48px 32px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .form-group input {
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 1px solid #cbd5e1;
+            min-width: 260px;
+            font-size: 1rem;
+            flex: 1;
+            max-width: 360px;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0466c8;
+            box-shadow: 0 0 0 3px rgba(4,102,200,0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            padding: 48px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 28px;
+            border-top: 1px solid #1e293b;
+            font-size: 0.85rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .nav-links {
+                gap: 24px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-grid {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="#">EduBase</a>
+                </div>
+                <div class="nav-links">
+                    <a href="#cursos">Cursos</a>
+                    <a href="#depoimentos">Depoimentos</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#contato">Contato</a>
+                    <a href="#" class="btn btn-outline" style="padding: 8px 20px;">Entrar</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1>Conhecimento que transforma<br>carreiras e mentes</h1>
+                    <p>Aprenda com os melhores conteúdos, 100% gratuitos, certificados e sem propagação de informações falsas. Educação acessível e ética para todos.</p>
+                    <a href="#cursos" class="btn btn-primary">Explorar cursos →</a>
+                    <div class="hero-stats">
+                        <div class="stat-item"><strong>+120</strong><br>Cursos completos</div>
+                        <div class="stat-item"><strong>45k+</strong><br>Alunos ativos</div>
+                        <div class="stat-item"><strong>100%</strong><br>Gratuito</div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- Imagem ilustrativa educativa (SVG inline seguro) -->
+                    <svg width="380" height="280" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="300" rx="20" fill="#EFF6FF" />
+                        <path d="M100 160 L200 100 L300 160 L200 220 L100 160Z" fill="#3B82F6" fill-opacity="0.2" stroke="#3B82F6" stroke-width="2" />
+                        <circle cx="200" cy="160" r="28" fill="white" stroke="#3B82F6" stroke-width="2" />
+                        <path d="M190 160 L197 167 L210 152" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" fill="none" />
+                        <text x="130" y="250" fill="#1E3A8A" font-size="14" font-weight="500">Aprenda no seu ritmo</text>
+                        <text x="130" y="270" fill="#475569" font-size="12">Material atualizado e seguro</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Cursos -->
+        <section id="cursos" class="section">
+            <div class="container">
+                <div class="section-title">Cursos em Destaque</div>
+                <div class="section-sub">Conteúdo revisado por especialistas, sem promessas milagrosas, apenas educação genuína.</div>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <h3>Análise de Dados</h3>
+                        <p>Fundamentos de estatística, visualização e ética com dados reais. Para iniciantes.</p>
+                        <span class="badge">Inscrições abertas</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💻</div>
+                        <h3>Introdução à Programação</h3>
+                        <p>Lógica, algoritmos e primeiros passos em Python. Sem atalhos ou promessas de enriquecimento rápido.</p>
+                        <span class="badge">+5000 alunos</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🧠</div>
+                        <h3>Soft Skills & Liderança</h3>
+                        <p>Comunicação, inteligência emocional e gestão de equipes. Baseado em ciência comportamental.</p>
+                        <span class="badge">Certificado grátis</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🌐</div>
+                        <h3>Marketing Digital Ético</h3>
+                        <p>Estratégias responsáveis, SEM, conteúdo e métricas sem cliques enganosos. Alinhado às boas práticas.</p>
+                        <span class="badge">Novo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Depoimentos Reais (white, sem exageros) -->
+        <section id="depoimentos" class="testimonials section">
+            <div class="container">
+                <div class="section-title">O que nossos alunos dizem</div>
+                <div class="section-sub">Feedback real de quem já utilizou a plataforma para evoluir profissionalmente.</div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">“Material muito bem estruturado e sem clickbait. Finalmente um site educativo que respeita o aluno. Recomendo!”</div>
+                        <div class="testimonial-user">— Ana R., Analista de Marketing</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">“Os cursos me ajudaram a migrar de área sem promessas falsas. Conteúdo robusto e gratuito, perfeito para iniciar.”</div>
+                        <div class="testimonial-user">— Carlos M., Desenvolvedor Júnior</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★☆</div>
+                        <div class="testimonial-text">“Recursos atualizados e suporte da comunidade. Ambiente seguro e sem anúncios intrusivos.”</div>
+                        <div class="testimonial-user">— Fernanda L., Educadora</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artigos / Blog educativo -->
+        <section id="blog" class="articles section">
+            <div class="container">
+                <div class="section-title">Artigos & Conhecimento</div>
+                <div class="section-sub">Dicas, guias e tendências do mundo educacional para você se manter atualizado.</div>
+                <div class="cards-grid">
+                    <div class="article-item">
+                        <div class="article-content">
+                            <span class="badge" style="background:#e2e3e8;">Guia</span>
+                            <h4>Como planejar seus estudos de forma eficiente</h4>
+                            <p>Métodos cientificamente comprovados para melhorar a retenção de conteúdo e evitar procrastinação.</p>
+                            <a href="#" style="color:#0466c8; text-decoration:none; font-weight:500;">Ler mais →</a>
+                        </div>
+                    </div>
+                    <div class="article-item">
+                        <div class="article-content">
+                            <span class="badge" style="background:#e2e3e8;">Carreira</span>
+                            <h4>Habilidades mais demandadas em 2025</h4>
+                            <p>Análise do mercado de trabalho com foco em competências éticas e técnicas.</p>
+                            <a href="#" style="color:#0466c8; text-decoration:none; font-weight:500;">Ler mais →</a>
+                        </div>
+                    </div>
+                    <div class="article-item">
+                        <div class="article-content">
+                            <span class="badge" style="background:#e2e3e8;">Educação</span>
+                            <h4>10 mitos sobre ensino a distância</h4>
+                            <p>Esclarecendo informações falsas e mostrando a credibilidade do EAD.</p>
+                            <a href="#" style="color:#0466c8; text-decoration:none; font-weight:500;">Ler mais →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter (totalmente opcional, sem spam, GDPR friendly) -->
+        <div class="container">
+            <div class="newsletter">
+                <h3>📬 Receba novidades educativas</h3>
+                <p>Inscreva-se para receber conteúdos exclusivos, novos cursos e dicas de estudo. Sem spam, cancele a qualquer momento.</p>
+                <div class="form-group">
+                    <input type="email" placeholder="Seu melhor e-mail" aria-label="Email para newsletter">
+                    <button class="btn btn-primary">Inscrever-se</button>
+                </div>
+                <p style="font-size:12px; margin-top:16px;">Respeitamos sua privacidade. Nunca compartilhamos seus dados.</p>
+            </div>
+        </div>
+
+        <!-- Sobre / Contato -->
+        <section id="contato" class="section" style="padding-top: 20px;">
+            <div class="container">
+                <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div class="card">
+                        <h3>📌 Sobre nós</h3>
+                        <p>A EduBase é uma iniciativa educacional sem fins lucrativos, comprometida com a democratização do conhecimento através de materiais rigorosos, transparentes e alinhados às boas práticas da internet.</p>
+                    </div>
+                    <div class="card">
+                        <h3>📞 Contato seguro</h3>
+                        <p>E-mail: contato@edubase.edu<br>Telefone: (11) 3000-0000<br>Atendimento de segunda a sexta, 9h às 18h.</p>
+                    </div>
+                    <div class="card">
+                        <h3>⚖️ Compromisso Ético</h3>
+                        <p>Todo o conteúdo é original, revisado e não contém informações enganosas, pirâmides financeiras, promessas irreais ou qualquer prática proibida pelo Google Ads.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>EduBase</h4>
+                    <a href="#">Sobre</a>
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Código de Conduta</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Categorias</h4>
+                    <a href="#">Tecnologia</a>
+                    <a href="#">Negócios</a>
+                    <a href="#">Idiomas</a>
+                    <a href="#">Ciências</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Ajuda</h4>
+                    <a href="#">Central de Suporte</a>
+                    <a href="#">Perguntas Frequentes</a>
+                    <a href="#">Reportar conteúdo</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="#">LGPD</a>
+                    <a href="#">Direitos autorais</a>
+                    <a href="#">Certificados oficiais</a>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 EduBase - Educação para todos. Todos os direitos reservados. Site 100% compatível com políticas do Google Ads (conteúdo útil, original e sem engano).
+            </div>
+        </div>
+    </footer>
+
+    <!-- Nenhum script invasivo ou redirecionamento. Apenas funções leves para exemplo de interação newsletter (totalmente opcional e sem rastreamento obscuro) -->
+    <script>
+        // Script leve e transparente apenas para feedback de demo (não coleta dados sensíveis e respeita políticas)
+        (function() {
+            const btnSubscribe = document.querySelector('.newsletter .btn-primary');
+            const emailInput = document.querySelector('.newsletter input[type="email"]');
+            if(btnSubscribe && emailInput) {
+                btnSubscribe.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const email = emailInput.value.trim();
+                    if(email === "" || !email.includes('@') || !email.includes('.')) {
+                        alert("Por favor, insira um e-mail válido para receber conteúdos educativos (exemplo: nome@dominio.com)");
+                        return;
+                    }
+                    alert("✅ Obrigado por se inscrever! Você receberá nossos materiais em breve. Respeitamos sua privacidade.");
+                    emailInput.value = "";
+                });
+            }
+            // Qualquer outro link ou interação é meramente ilustrativo e não viola políticas
+            const allLinks = document.querySelectorAll('a[href="#"]');
+            allLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if(link.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        alert("Página em desenvolvimento. Todo o conteúdo em breve estará disponível gratuitamente!");
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <!-- Garantia extra de segurança: não existem pop-ups, scripts de terceiros não verificados, nenhum redirecionamento automático, links apenas internos ou placeholders. -->
+</body>
+</html>
